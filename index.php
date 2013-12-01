@@ -35,11 +35,17 @@
 		help window
 		</div>
 		<div id="controls">
-		controls
+
+			<img id="hit_button" class="controlbuttons" src="images/hit.png" alt="hit" >
+			<img id="stand_button" class="controlbuttons"src="images/stand.png" alt="stand"  >
+			<img id="double_button" class="controlbuttons"src="images/double.png" alt="double">
+			<img id="split_button" class="controlbuttons"src="images/split.png" alt="split"  >
+			<img id="deal_button" class="controlbuttons"src="images/deal.png" alt="deal"  >			
 		</div>
 	</div>
 
-	
+	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 	
 </body>
 </html>
