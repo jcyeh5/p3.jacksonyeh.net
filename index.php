@@ -36,16 +36,16 @@
 		</div>
 		<div id="controls">
 
-			<img id="hit_button" class="controlbuttons" src="images/hit.png" alt="hit" >
-			<img id="stand_button" class="controlbuttons"src="images/stand.png" alt="stand"  >
-			<img id="double_button" class="controlbuttons"src="images/double.png" alt="double">
-			<img id="split_button" class="controlbuttons"src="images/split.png" alt="split"  >
-			<img id="deal_button" class="controlbuttons"src="images/deal.png" alt="deal"  >			
+			<img id="hit_button" class="controlbuttons" class="rollover" src="images/hit.png" rel="images/hit_hover.png" alt="hit button">
+			<img id="stand_button" class="controlbuttons" src="images/stand.png" rel="images/stand_hover.png" alt="stand button" >
+			<img id="double_button" class="controlbuttons" src="images/double.png" rel="images/double_hover.png" alt="double button" >
+			<img id="split_button" class="controlbuttons" src="images/split.png" rel="images/split_hover.png" alt="split button"  >
+			<img id="deal_button" class="controlbuttons" src="images/deal.png" rel="images/deal_hover.png" alt="deal button"  >			
 		</div>
 	</div>
 
 	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
+	<script type="text/javascript" src="/js/blackjack.js"></script>
 	
 </body>
 </html>
