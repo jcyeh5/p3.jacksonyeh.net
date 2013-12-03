@@ -6,6 +6,19 @@ body {
 
 } 
 
+#headerimage {
+	display: block;
+	background-image: url(/images/banner1.png);  
+	height: 160px;  
+	width:  1100px;
+	text-indent: -9999px;
+	margin: 0 auto;
+}
+#header {
+	width:  1100px;
+	background: #A0A0A0 ;
+	margin: 0 auto;
+}
 #wrapper {
 	width:  1100px;
 	background: #A0A0A0 ;
@@ -41,6 +54,7 @@ body {
 	width: 790px;
 	height: 160px;
 	border: thick solid white;
+
 }
 
 #status{
@@ -62,7 +76,7 @@ cursor:pointer;
 }
 
 .cardslot {
-margin-top: 10px;
+margin-top: 20px;
 
 float: left;
 }

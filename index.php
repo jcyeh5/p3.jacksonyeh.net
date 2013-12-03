@@ -12,7 +12,7 @@
 
 <body>	
 	<div id="header">
-		<a href='/' id="headerimage" title="My Two Cents"><h1>Card Counter's Blackjack</h1></a>
+		<a href='/' id="headerimage" title="Card Counter's Blackjack"><h1>Card Counter's Blackjack</h1></a>
 	</div>
 	
 	<div id="wrapper">
@@ -40,6 +40,9 @@
 				</div>	
 				<div id="dealercard7" class="cardslot">
 					<img class="card" src="images/DA.png">	
+				</div>	
+				<div id="dealercard8" class="cardslot">
+					<img class="card" src="images/CARDBACK.png">	
 				</div>					
 			</div>
 			<!-- the status of current hand -->	
@@ -68,7 +71,10 @@
 				</div>
 				<div id="playercard7" class="cardslot">
 					<img class="card" src="images/DQ.png">	
-				</div>				
+				</div>
+				<div id="playercard8" class="cardslot">
+					<img class="card" src="images/CARDBACK.png">	
+				</div>					
 			</div>
 		</div>
 		<div id="helpwindow">
