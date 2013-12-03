@@ -20,7 +20,27 @@
 		<div id="table">
 			<!-- the dealer's hand -->	
 			<div id="dealer">
-				dealer's hand
+				<div id="dealercard1" class="cardslot">
+					<img class="card" src="images/SK.png">
+				</div>
+				<div id="dealercard2" class="cardslot">
+					<img class="card" src="images/SA.png">				
+				</div>
+				<div id="dealercard3" class="cardslot">
+					<img class="card" src="images/CK.png">	
+				</div>
+				<div id="dealercard4" class="cardslot">
+					<img class="card" src="images/CA.png">	
+				</div>
+				<div id="dealercard5" class="cardslot">
+					<img class="card" src="images/HK.png">	
+				</div>
+				<div id="dealercard6" class="cardslot">
+					<img class="card" src="images/HA.png">	
+				</div>	
+				<div id="dealercard7" class="cardslot">
+					<img class="card" src="images/DA.png">	
+				</div>					
 			</div>
 			<!-- the status of current hand -->	
 			<div id="status">
@@ -28,7 +48,27 @@
 			</div>
 			<!-- the Player's hand -->	
 			<div id="player">
-				player's hand
+				<div id="playercard1" class="cardslot">
+					<img class="card" src="images/SQ.png">	
+				</div>
+				<div id="playercard2" class="cardslot">
+					<img class="card" src="images/SJ.png">	
+				</div>
+				<div id="playercard3" class="cardslot">
+					<img class="card" src="images/CQ.png">	
+				</div>
+				<div id="playercard4" class="cardslot">
+					<img class="card" src="images/CJ.png">	
+				</div>
+				<div id="playercard5" class="cardslot">
+					<img class="card" src="images/HQ.png">	
+				</div>
+				<div id="playercard6" class="cardslot">
+					<img class="card" src="images/HJ.png">	
+				</div>
+				<div id="playercard7" class="cardslot">
+					<img class="card" src="images/DQ.png">	
+				</div>				
 			</div>
 		</div>
 		<div id="helpwindow">
