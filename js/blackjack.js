@@ -71,6 +71,8 @@ function activateButtons() {
 	$('#double_button').attr('src', 'images/double.png');	
 }
 
+
+
 /*-------------------------------------------------------------------------------------------------
 Buttons
 -------------------------------------------------------------------------------------------------*/
@@ -108,6 +110,24 @@ $('.controlbuttons').click(function() {
 		}		
 
 	 }
+
+	 if (this.id == "stand_button") {
+		// show both cards
+		$('#dealerhand').html("");
+		for (var i=0; i<2; i++) {
+			var newcard_image = '<img class="card" src="images/' + dealercards[i] + '.png">';
+			$('#dealerhand').append(newcard_image);
+		}
+		// hit until 17
+		while (handValue(dealercards) < 17) {
+			var newcard = draw();
+			var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
+
+			$('#dealerhand').append(newcard_image);
+			dealercards.push(newcard);		
+		}
+	 }
+	 
 	 
 	 if (this.id == "deal_button") {	 
 		activateButtons();
