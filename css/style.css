@@ -27,8 +27,9 @@ body {
 
 #table {
 	width: 800px;
-	background: green;
-	border: thick solid brown;
+	background-image: url(/images/table1.png);  
+
+	border: thick solid darkgreen;
 	float: left;
 }
 
@@ -41,11 +42,11 @@ body {
 }
 
 #controls{
-	width: 800px;
+	width: 808px;
 	height: 100px;
-	background-image: url(/images/controls_background.png);  
+	background-image: url(/images/cherrywood.jpg);  
 	
-	border: thick solid black;
+	border: thin solid black;
 	float: left;
 }
 
@@ -53,19 +54,19 @@ body {
 #dealerhand {
 	width: 790px;
 	height: 160px;
-	border: thick solid white;
+
 
 }
 
 #status{
 	width: 790px;
 	height: 50px;
-	border: thick solid white;
+
 }
 #playerhand {
 	width: 790px;
 	height: 160px;
-	border: thick solid white;
+
 }
 
 .controlbuttons {

@@ -1,6 +1,7 @@
 /*-------------------------------------------------------------------------------------------------
 Global Variables
 -------------------------------------------------------------------------------------------------*/
+(function () {
 
 // deck of cards as an array
 var cards = [	"SA","S2","S3","S4","S5","S6","S7","S8","S9","S10","SJ","SQ","SK",
@@ -12,6 +13,7 @@ var top = 0;			// index of the top card in deck
 var dealercards = []; 	// cards in dealer's hand
 var playercards = [];	// cards in player's hand
 
+var ingame = false;
 
 function isEmpty(){
 	if (top == 52) {
@@ -55,7 +57,19 @@ function getCardValue(card) {
 	else return parseInt(rank);
 }
 
+function deactivateButtons() {
+	// changes color to grey
+	$('#hit_button').attr('src', 'images/hit_disabled.png');
+	$('#stand_button').attr('src', 'images/stand_disabled.png');
+	$('#double_button').attr('src', 'images/double_disabled.png');	
+}
 
+function activateButtons() {
+	// changes color to blue
+	$('#hit_button').attr('src', 'images/hit.png');
+	$('#stand_button').attr('src', 'images/stand.png');
+	$('#double_button').attr('src', 'images/double.png');	
+}
 
 /*-------------------------------------------------------------------------------------------------
 Buttons
@@ -76,16 +90,28 @@ $('.controlbuttons').click(function() {
 			var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
 			$('#playerhand').append(newcard_image);
 			playercards.push(newcard);
-			var x = handValue(playercards);
+			var value = handValue(playercards);
+			if (value == 21) {
+				$('#status').html("blackjack!!!");
+				deactivateButtons();
+				ingame = false;
+			}
+			else if (value > 21) {
+				$('#status').html("you busted!!!");			
+				deactivateButtons();
+				ingame = false;
+				}				
+			
 		}
 		else if (handvalue > 21) {
-			$('#status').html("you busted!!!");
+			$('#status').html("you busted already!!!");
 		}		
 
 	 }
 	 
 	 if (this.id == "deal_button") {	 
-
+		activateButtons();
+		ingame = true;
 		dealercards = [];
 		playercards = [];
 		$('#dealerhand').html("");
@@ -115,25 +141,26 @@ $('.controlbuttons').click(function() {
 
 $('.controlbuttons').on( "mouseenter", function() {
 
-    console.log( "mouse hovered over" );
-
-	var img_src = ""; 
-	var new_src = ""; 
-	img_src = $(this).attr('src'); //grab original image 
-	new_src = $(this).attr('rel'); //grab rollover image 
-	$(this).attr('src', new_src); //swap images 
-	$(this).attr('rel', img_src); //swap images   
-
+	if (ingame == true || this.id == "deal_button") {
+		var img_src = ""; 
+		var new_src = ""; 
+		img_src = $(this).attr('src'); //grab original image 
+		new_src = $(this).attr('rel'); //grab rollover image 
+		$(this).attr('src', new_src); //swap images 
+		$(this).attr('rel', img_src); //swap images   
+	}
 });
 
 $('.controlbuttons').on( "mouseleave", function() {
 
-	var img_src = ""; 
-	var new_src = ""; 	
-	img_src = $(this).attr('src'); //grab original image 
-	new_src = $(this).attr('rel'); //grab rollover image 	
-	$(this).attr('src', new_src); //swap images 
-	$(this).attr('rel', img_src); //swap images   
+	if (ingame == true || this.id == "deal_button") {
+		var img_src = ""; 
+		var new_src = ""; 	
+		img_src = $(this).attr('src'); //grab original image 
+		new_src = $(this).attr('rel'); //grab rollover image 	
+		$(this).attr('src', new_src); //swap images 
+		$(this).attr('rel', img_src); //swap images   
+	}
 });
 
 
@@ -142,7 +169,10 @@ $(document).ready(function($) {
 	console.log("document ready"); 
 
 		
-	
+	if (ingame == false) {
+		// if not in the middle of a hand, grey out buttons
+		deactivateButtons();	
+	}
  
 	//preload images 
 	var cache = new Array(); //cycle through all rollover elements and add rollover img src to cache array 
@@ -152,4 +182,6 @@ $(document).ready(function($) {
 	cache.push(cacheImage); 
 	}); 
 });
+
+}());
 //- See more at: http://www.grasmash.com/article/simple-jquery-script-swapping-images-hoverrollover#sthash.8op7JXg9.dpuf
