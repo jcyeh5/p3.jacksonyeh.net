@@ -50,7 +50,7 @@ body {
 }
 
 
-#dealer {
+#dealerhand {
 	width: 790px;
 	height: 160px;
 	border: thick solid white;
@@ -62,7 +62,7 @@ body {
 	height: 50px;
 	border: thick solid white;
 }
-#player {
+#playerhand {
 	width: 790px;
 	height: 160px;
 	border: thick solid white;
@@ -70,19 +70,15 @@ body {
 
 .controlbuttons {
 margin: 10px;
-height: 40px;
-width: 110px;
+height: 60px;
+width: 140px;
 cursor:pointer;
 }
 
-.cardslot {
-margin-top: 20px;
 
-float: left;
-}
 
 .card {
 
-height: 120px;
-width: 90px;
+height: 160px;
+width: 120px;
 }
