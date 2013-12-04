@@ -8,7 +8,7 @@ body {
 
 #headerimage {
 	display: block;
-	background-image: url(/images/banner1.png);  
+	background-image: url(/images/banner1.jpg);  
 	height: 160px;  
 	width:  1100px;
 	text-indent: -9999px;
@@ -27,7 +27,7 @@ body {
 
 #table {
 	width: 800px;
-	background-image: url(/images/table1.png);  
+	background-image: url(/images/table1.jpg);  
 
 	border: thick solid darkgreen;
 	float: left;
