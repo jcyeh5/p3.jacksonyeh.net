@@ -102,7 +102,7 @@ $('.controlbuttons').click(function() {
 				$('#status').html("you busted!!!");			
 				deactivateButtons();
 				ingame = false;
-				}				
+			}				
 			
 		}
 		else if (handvalue > 21) {
@@ -135,7 +135,8 @@ $('.controlbuttons').click(function() {
 		dealercards = [];
 		playercards = [];
 		$('#dealerhand').html("");
-		$('#playerhand').html("");		
+		$('#playerhand').html("");
+		
 
 	 	for (var i=0; i<2; i++) {
 			var newcard = draw();
@@ -161,25 +162,22 @@ $('.controlbuttons').click(function() {
 
 $('.controlbuttons').on( "mouseenter", function() {
 
+console.log("mouseenter");
 	if (ingame == true || this.id == "deal_button") {
-		var img_src = ""; 
-		var new_src = ""; 
-		img_src = $(this).attr('src'); //grab original image 
-		new_src = $(this).attr('rel'); //grab rollover image 
-		$(this).attr('src', new_src); //swap images 
-		$(this).attr('rel', img_src); //swap images   
+		if (this.id == "deal_button") $(this).attr('src', "images/deal_hover.png");
+		else if (this.id == "hit_button") $(this).attr('src', "images/hit_hover.png");
+		else if (this.id == "stand_button") $(this).attr('src', "images/stand_hover.png");	
+		else if (this.id == "double_button") $(this).attr('src', "images/double_hover.png");		 
 	}
 });
 
 $('.controlbuttons').on( "mouseleave", function() {
 
 	if (ingame == true || this.id == "deal_button") {
-		var img_src = ""; 
-		var new_src = ""; 	
-		img_src = $(this).attr('src'); //grab original image 
-		new_src = $(this).attr('rel'); //grab rollover image 	
-		$(this).attr('src', new_src); //swap images 
-		$(this).attr('rel', img_src); //swap images   
+		if (this.id == "deal_button") $(this).attr('src', "images/deal.png");
+		else if (this.id == "hit_button") $(this).attr('src', "images/hit.png");
+		else if (this.id == "stand_button") $(this).attr('src', "images/stand.png");	
+		else if (this.id == "double_button") $(this).attr('src', "images/double.png");		 
 	}
 });
 
