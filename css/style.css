@@ -62,11 +62,11 @@ body {
 
 #status {
 width: 359px;
-text-align: center;
+
 }
 #statusText {
 	text-align: center;
-	margin: auto;
+
 }
 #playerScore {
 	
@@ -107,7 +107,7 @@ text-align: center;
 }
 
 .controlbuttons {
-margin: 10px;
+margin: 20px 5px auto 40px;
 height: 60px;
 width: 140px;
 cursor:pointer;
