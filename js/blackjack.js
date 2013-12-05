@@ -4,7 +4,7 @@ Global Variables
 (function () {
 
 // deck of cards as an array
-var cards = [	"SA","S2","S3","S4","S5","S6","S7","S8","S9","S10","SJ","SQ","SK",
+var cards = [	"S2","S3","SA","SA","S5","S6","SA","SA","S9","S10","SJ","SQ","SK",
 				"CA","C2","C3","C4","C5","C6","C7","C8","C9","C10","CJ","CQ","CK",
 				"DA","D2","D3","D4","D5","D6","D7","D8","D9","D10","DJ","DQ","DK",
 				"HA","H2","H3","H4","H5","H6","H7","H8","H9","H10","HJ","HQ","HK",];
@@ -44,8 +44,29 @@ function handValue(array){
 		var cardValue = getCardValue(array[i]);
 		value = value + cardValue;
 	}
+	
+	// what about an Ace when count over 21?
+	if (value > 21){
+		var numAces = 0
+		// go through hand, looking for Aces
+		for (var i=0; i<array.length; i++) {
+			if (getCardValue(array[i]) == 11) {
+				numAces++;
+			}		
+		}
+		// change the value of one Ace at a time until hand value <= 21
+		for (var j=0; j< numAces; j++)
+		{
+			value = value - 10;
+			if (value <= 21) {
+				return value;
+			}
+		}
+	}
 	return value;
 };
+
+
 
 function getCardValue(card) {
 	var rank = card.charAt(1);
@@ -93,6 +114,7 @@ $('.controlbuttons').click(function() {
 			$('#playerhand').append(newcard_image);
 			playercards.push(newcard);
 			var value = handValue(playercards);
+			console.log(value);
 			if (value == 21) {
 				$('#status').html("blackjack!!!");
 				deactivateButtons();
@@ -112,7 +134,7 @@ $('.controlbuttons').click(function() {
 	 }
 
 	 if (this.id == "stand_button") {
-		// show both cards
+		// show both dealer cards
 		$('#dealerhand').html("");
 		for (var i=0; i<2; i++) {
 			var newcard_image = '<img class="card" src="images/' + dealercards[i] + '.png">';
