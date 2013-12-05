@@ -16,24 +16,31 @@
 	</div>
 	
 	<div id="wrapper">
+		<div id="statusBox">
+			<div id="dealerScore" class="scoreBox"> <span id="dealerScoreText" class="scoreText">Dealer's Hand:</span></div>
+			<div id="status" class="scoreBox"><span id="statusText" class="scoreText"></span></div>
+			<div id="playerScore" class="scoreBox"> <span id="playerScoreText" class="scoreText">Player's Hand:</span></div>
+
+		</div>
+		<div id="helpwindow">
+		help window
+		</div>	
 		<!-- the table -->	
 		<div id="table">
-			<!-- the dealer's hand -->	
+		<!-- the dealer's hand -->	
 			<div id="dealerhand">
 
 			</div>
-			<!-- the status of current hand -->	
-			<div id="status">
-
+			<!-- the place to put chips (future enhancement) -->	
+			<div id="midtable">
+test
 			</div>
 			<!-- the Player's hand -->	
 			<div id="playerhand">
 				
 			</div>
 		</div>
-		<div id="helpwindow">
-		help window
-		</div>
+
 		<div id="controls">
 
 			<img id="hit_button" class="controlbuttons" src="images/hit.png" rel="images/hit_hover.png" alt="hit button">

@@ -4,7 +4,7 @@ Global Variables
 (function () {
 
 // deck of cards as an array
-var cards = [	"S2","S3","SA","SA","S5","S6","SA","SA","S9","S10","SJ","SQ","SK",
+var cards = [	"SA","S2","S3","S4","S5","S6","S7","S8","S9","S10","SJ","SQ","SK",
 				"CA","C2","C3","C4","C5","C6","C7","C8","C9","C10","CJ","CQ","CK",
 				"DA","D2","D3","D4","D5","D6","D7","D8","D9","D10","DJ","DQ","DK",
 				"HA","H2","H3","H4","H5","H6","H7","H8","H9","H10","HJ","HQ","HK",];
@@ -92,7 +92,16 @@ function activateButtons() {
 	$('#double_button').attr('src', 'images/double.png');	
 }
 
+function updateScores() {
+	$('#dealerScoreText').html("Dealer's Hand:  " + handValue(dealercards));
+	$('#playerScoreText').html("Player's Hand:  " + handValue(playercards));
+}
 
+function clearStatusText() {
+	$('#statusText').html("");
+	$('#dealerScoreText').html("Dealer's Hand:  " );
+	$('#playerScoreText').html("Player's Hand:  " );	
+}
 
 /*-------------------------------------------------------------------------------------------------
 Buttons
@@ -101,39 +110,37 @@ $('.controlbuttons').click(function() {
 
 	 // Which control button was clicked?
 	 
-	 if (this.id == "hit_button") {
+	 if (this.id == "hit_button" && ingame == true) {
 		var handvalue = handValue(playercards);
 	 
-		if (handvalue == 0) {
-			$('#status').html("wait for the dealer to deal cards first!");
-		}
-		else if (handvalue > 0 && handvalue <= 21 ) {
+		if (handvalue > 0 && handvalue <= 21 ) {
 		
 			var newcard = draw();
 			var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
 			$('#playerhand').append(newcard_image);
 			playercards.push(newcard);
 			var value = handValue(playercards);
+			updateScores();
 			console.log(value);
 			if (value == 21) {
-				$('#status').html("blackjack!!!");
+				$('#statusText').html("blackjack!!!");
 				deactivateButtons();
 				ingame = false;
 			}
 			else if (value > 21) {
-				$('#status').html("you busted!!!");			
+				$('#statusText').html("you busted!!!");			
 				deactivateButtons();
 				ingame = false;
 			}				
 			
 		}
 		else if (handvalue > 21) {
-			$('#status').html("you busted already!!!");
+			$('#statusText').html("you busted already!!!");
 		}		
 
 	 }
 
-	 if (this.id == "stand_button") {
+	 if (this.id == "stand_button" && ingame == true) {
 		// show both dealer cards
 		$('#dealerhand').html("");
 		for (var i=0; i<2; i++) {
@@ -153,6 +160,7 @@ $('.controlbuttons').click(function() {
 	 
 	 if (this.id == "deal_button") {	 
 		activateButtons();
+		clearStatusText();
 		ingame = true;
 		dealercards = [];
 		playercards = [];
@@ -176,6 +184,8 @@ $('.controlbuttons').click(function() {
 		var newcard_image = '<img class="card" src="images/CARDBACK.png">';
 		$('#dealerhand').append(newcard_image);
 		dealercards.push(newcard);	
+		
+		updateScores();
 	}
 	 
 });	
