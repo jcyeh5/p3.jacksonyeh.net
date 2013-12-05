@@ -24,7 +24,7 @@
 			</div>
 			<!-- the status of current hand -->	
 			<div id="status">
-				status
+
 			</div>
 			<!-- the Player's hand -->	
 			<div id="playerhand">
@@ -36,7 +36,7 @@
 		</div>
 		<div id="controls">
 
-			<img id="hit_button" class="controlbuttons" class="rollover" src="images/hit.png" rel="images/hit_hover.png" alt="hit button">
+			<img id="hit_button" class="controlbuttons" src="images/hit.png" rel="images/hit_hover.png" alt="hit button">
 			<img id="stand_button" class="controlbuttons" src="images/stand.png" rel="images/stand_hover.png" alt="stand button" >
 			<img id="double_button" class="controlbuttons" src="images/double.png" rel="images/double_hover.png" alt="double button" >
 			<img id="deal_button" class="controlbuttons" src="images/deal.png" rel="images/deal_hover.png" alt="deal button"  >			

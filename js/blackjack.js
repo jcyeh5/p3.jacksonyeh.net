@@ -193,10 +193,10 @@ $(document).ready(function($) {
 	}
  
 	//preload images 
-	var cache = new Array(); //cycle through all rollover elements and add rollover img src to cache array 
-	$(".rollover").each(function(){ 
-	var cacheImage = document.createElement('img'); 
-	cacheImage.src = $(this).attr('rel'); 
+	var cache = new Array(); //add all images to cache array 
+	$('img').each(function(){ 
+	var cacheImage = new  Image(); 
+	cacheImage.src = $(this).attr('src'); 
 	cache.push(cacheImage); 
 	}); 
 });
