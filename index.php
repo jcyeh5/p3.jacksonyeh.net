@@ -33,7 +33,7 @@
 			</div>
 			<!-- the place to put chips (future enhancement) -->	
 			<div id="midtable">
-test
+
 			</div>
 			<!-- the Player's hand -->	
 			<div id="playerhand">

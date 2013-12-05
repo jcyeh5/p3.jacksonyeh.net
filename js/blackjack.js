@@ -93,7 +93,9 @@ function activateButtons() {
 }
 
 function updateScores() {
-	$('#dealerScoreText').html("Dealer's Hand:  " + handValue(dealercards));
+	if (ingame == true){
+		$('#dealerScoreText').html("Dealer's Hand:   ??");
+	} else 		$('#dealerScoreText').html("Dealer's Hand:  " + handValue(dealercards));
 	$('#playerScoreText').html("Player's Hand:  " + handValue(playercards));
 }
 
@@ -102,7 +104,71 @@ function clearStatusText() {
 	$('#dealerScoreText').html("Dealer's Hand:  " );
 	$('#playerScoreText').html("Player's Hand:  " );	
 }
+function dealerPlays() {
+	// show both dealer cards
+	$('#dealerhand').html("");
+	for (var i=0; i<2; i++) {
+		var newcard_image = '<img class="card" src="images/' + dealercards[i] + '.png">';
+		$('#dealerhand').append(newcard_image);
+	}
+	// hit until 17
+	while (handValue(dealercards) < 17) {
+		var newcard = draw();
+		var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
+		$('#dealerhand').append(newcard_image);
+		dealercards.push(newcard);
+		updateScores();
+	}
+}
 
+function whoWon() {
+	// if player had blackjack
+	if (hasBlackjack(playercards) == true) {
+		// dealer also had blackjack
+		if (hasBlackjack(dealercards) == true) {
+			return "tie";
+		} else return "player";
+	}
+	// if dealer had blackjack
+	if (hasBlackjack(dealercards) == true) {
+		// player also had blackjack
+		if (hasBlackjack(playercards) == true){
+			return "tie";
+		} else return "dealer";
+	}
+
+	// if dealer busted
+	if (handValue(dealercards) > 21) {
+		return "player";
+	}
+	
+	// compare the two hands
+	if (handValue(dealercards) == handValue(playercards)) {
+		return "tie";
+	}
+	else if (handValue(dealercards) > handValue(playercards)) {
+		return "dealer";
+	}
+	else return "player";
+}
+
+function dealerWins() {
+	$('#statusText').html("Dealer Wins");
+}
+
+function playerWins(message) {
+	$('#statusText').html(message);
+}
+
+function tie() {
+	$('#statusText').html("TIE");
+}
+
+function hasBlackjack(array){
+	if (array.length == 2 && handValue(array) == 21){
+		return true;
+	} else return false;
+}
 /*-------------------------------------------------------------------------------------------------
 Buttons
 -------------------------------------------------------------------------------------------------*/
@@ -141,20 +207,26 @@ $('.controlbuttons').click(function() {
 	 }
 
 	 if (this.id == "stand_button" && ingame == true) {
-		// show both dealer cards
-		$('#dealerhand').html("");
-		for (var i=0; i<2; i++) {
-			var newcard_image = '<img class="card" src="images/' + dealercards[i] + '.png">';
-			$('#dealerhand').append(newcard_image);
+		
+		deactivateButtons();
+		ingame = false;
+		updateScores();
+		dealerPlays();
+		var x= whoWon();
+		if (x=="tie") {
+			tie();
 		}
-		// hit until 17
-		while (handValue(dealercards) < 17) {
-			var newcard = draw();
-			var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
-
-			$('#dealerhand').append(newcard_image);
-			dealercards.push(newcard);		
+		else if (x=="player"){
+			if (hasBlackjack(playercards) == true) {
+				playerWins("Blackjack!!!     Player wins!!!");
+			}
+			else playerWins("Player Wins");
 		}
+		else if (x=="dealer"){
+			dealerWins();
+		}
+			
+		
 	 }
 	 
 	 
@@ -186,6 +258,8 @@ $('.controlbuttons').click(function() {
 		dealercards.push(newcard);	
 		
 		updateScores();
+		
+		// if 
 	}
 	 
 });	
