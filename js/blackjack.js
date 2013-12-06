@@ -20,7 +20,11 @@ var bet = 0;			// player's bet
 var cardCount = 0;		// the card count
 
 
-
+function preload(arrayOfImages) {
+    $(arrayOfImages).each(function () {
+        $('<img />').attr('src',this).appendTo('body').css('display','none');
+    });
+}
 
 /*-------------------------------------------------------------------------------------------------
 Deck functions
@@ -482,22 +486,18 @@ $(document).ready(function($) {
 */
 
 
-	if (!preloadImages.list) {
-		preloadImages.list = [];
-	}
+	var arrayOfImages = new Array();
+	// populate array with image src
 	for (var i = 0; i < 52; i++) {
-		var img = new Image();
-		img.src = 'images/' + cards[i] + '.png';
-		preloadImages.list.push(img);
+		$('<img/>')[0].src =  = 'images/' + cards[i] + '.png';
 	}
-
-
-
 
 	
 	// get new deck
 	getNewDeck();
 	
 });
+
+
 
 }());
