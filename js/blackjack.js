@@ -164,13 +164,11 @@ function whoWon() {
 		if (hasBlackjack(playercards) == true){
 			return "tie";
 		} else return "dealer";
-	}
-
+	}	
 	// if dealer busted
 	if (handValue(dealercards) > 21) {
 		return "player";
 	}
-	
 	// compare the two hands
 	if (handValue(dealercards) == handValue(playercards)) {
 		return "tie";
@@ -179,6 +177,15 @@ function whoWon() {
 		return "dealer";
 	}
 	else return "player";
+}
+
+function busted() {
+	deactivateButtons();
+	ingame = false;
+	updateScores();	
+	balance = balance - bet;
+	updateBalance()
+	$('#statusText').html("You busted");
 }
 
 function dealerWins() {
@@ -226,6 +233,32 @@ function stand() {
 		dealerWins();
 	}
 }
+
+function hit() {
+	var handvalue = handValue(playercards);
+	 
+	if (handvalue > 0 && handvalue <= 21 ) {
+		
+		var newcard = draw();
+		var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
+		$('#playerhand').append(newcard_image);
+		playercards.push(newcard);
+		var value = handValue(playercards);
+		updateScores();
+		console.log(value);
+		if (value == 21) {
+			stand();
+		}
+		else if (value > 21) {
+			busted();
+		}				
+		
+	}
+	else if (handvalue > 21) {
+		$('#statusText').html("you busted already!!!");
+	}
+}		
+
 /*-------------------------------------------------------------------------------------------------
 Buttons
 -------------------------------------------------------------------------------------------------*/
@@ -234,39 +267,28 @@ $('.controlbuttons').click(function() {
 	 // Which control button was clicked?
 	 
 	 if (this.id == "hit_button" && ingame == true) {
-		var handvalue = handValue(playercards);
-	 
-		if (handvalue > 0 && handvalue <= 21 ) {
-		
-			var newcard = draw();
-			var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
-			$('#playerhand').append(newcard_image);
-			playercards.push(newcard);
-			var value = handValue(playercards);
-			updateScores();
-			console.log(value);
-			if (value == 21) {
-				$('#statusText').html("blackjack!!!");
-				deactivateButtons();
-				ingame = false;
-			}
-			else if (value > 21) {
-				$('#statusText').html("you busted!!!");			
-				deactivateButtons();
-				ingame = false;
-			}				
-			
-		}
-		else if (handvalue > 21) {
-			$('#statusText').html("you busted already!!!");
-		}		
-
+		hit();
 	 }
 
 	 if (this.id == "stand_button" && ingame == true) {
 		stand();	
 	 }
-	 
+
+	 if (this.id == "double_button" && ingame == true) {
+		var double_bet = bet * 2;
+		if (double_bet > balance) {
+			double_bet = balance;
+		}
+		bet = double_bet;
+		//update the bet display
+		$("#spinner").spinner( "value", bet );
+		// hit once ...
+		hit();
+		// if player has not busted ...
+		if (ingame == true) {
+			stand();
+		}
+	 }	 
 	 
 	 if (this.id == "deal_button" && ingame == false) {	 
 
