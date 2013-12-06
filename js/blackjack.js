@@ -509,7 +509,7 @@ $(document).ready(function($) {
 	preload(arrayOfImages);
 	
 	// get new deck
-	getNewDeck();
+	//getNewDeck();
 	
 });
 
