@@ -38,9 +38,9 @@
 				  <label for="spinner">Bet Amount:</label>
 				  <input id="spinner" name="wager">
 				</p>
-				</br> 
-				minimum bet: $20 </br> 
-				maximum bet: $500</br>
+				<br/> 
+				minimum bet: $20 <br/> 
+				maximum bet: $500<br/>
 
 			
 			</div>

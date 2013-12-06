@@ -13,7 +13,8 @@ var top = 0;			// index of the top card in deck
 var dealercards = []; 	// cards in dealer's hand
 var playercards = [];	// cards in player's hand
 var ingame = false;
-var balance = 5000;		// player's initial balance is $5000
+var balance = 200;		// player's initial balance is $5000
+var bet = 0;			// player's bet
 
 
 function isEmpty(){
@@ -22,6 +23,16 @@ function isEmpty(){
 	}
 	else return false;
 };
+
+function howManyCardsInDeck() {
+	var num = 52 - top;
+	return num;
+}
+
+function getNewDeck() {
+	top = 0;
+	shuffle();
+}
 
 function draw(){
 	var card = cards[top];
@@ -37,6 +48,8 @@ function shuffle(){
 		cards[random] = temp;
 	}
 };
+
+
 	
 function handValue(array){
 	if (array.length == 0) return 0;
@@ -109,6 +122,10 @@ function updateScores() {
 	$('#playerScoreText').html("Player's Hand:  " + handValue(playercards));
 }
 
+function updateBalance() {
+	$('#balanceAmount').html("$ "+balance);	
+}
+
 function clearStatusText() {
 	$('#statusText').html("");
 	$('#dealerScoreText').html("Dealer's Hand:  " );
@@ -128,8 +145,10 @@ function dealerPlays() {
 		$('#dealerhand').append(newcard_image);
 		dealercards.push(newcard);
 		updateScores();
+	
 	}
 }
+
 
 function whoWon() {
 	// if player had blackjack
@@ -179,6 +198,34 @@ function hasBlackjack(array){
 		return true;
 	} else return false;
 }
+
+function stand() {
+	deactivateButtons();
+	ingame = false;
+	updateScores();
+	dealerPlays();
+	var x= whoWon();
+	if (x=="tie") {
+		tie();
+	}
+	else if (x=="player"){
+		if (hasBlackjack(playercards) == true) {
+			balance = balance + (bet * 1.5)
+			updateBalance();
+			playerWins("Blackjack!!!     You win!!!");
+		}
+		else {
+			balance = balance + bet;
+			updateBalance()
+			playerWins("You Win");
+		}
+	}
+	else if (x=="dealer"){
+		balance = balance - bet;
+		updateBalance()
+		dealerWins();
+	}
+}
 /*-------------------------------------------------------------------------------------------------
 Buttons
 -------------------------------------------------------------------------------------------------*/
@@ -217,59 +264,62 @@ $('.controlbuttons').click(function() {
 	 }
 
 	 if (this.id == "stand_button" && ingame == true) {
-		
-		deactivateButtons();
-		ingame = false;
-		updateScores();
-		dealerPlays();
-		var x= whoWon();
-		if (x=="tie") {
-			tie();
-		}
-		else if (x=="player"){
-			if (hasBlackjack(playercards) == true) {
-				playerWins("Blackjack!!!     Player wins!!!");
-			}
-			else playerWins("Player Wins");
-		}
-		else if (x=="dealer"){
-			dealerWins();
-		}
-			
-		
+		stand();	
 	 }
 	 
 	 
 	 if (this.id == "deal_button" && ingame == false) {	 
-		activateButtons();
-		clearStatusText();
-		ingame = true;
-		dealercards = [];
-		playercards = [];
-		$('#dealerhand').html("");
-		$('#playerhand').html("");
-		
 
-	 	for (var i=0; i<2; i++) {
+		bet = $('#spinner').spinner("value");
+		console.log(bet);
+		if (balance == 0) {
+			$('#statusText').html("Sorry, you are broke");
+		}
+		else if (bet <= balance) {
+		
+			activateButtons();
+			clearStatusText();
+			ingame = true;
+			dealercards = [];
+			playercards = [];
+			$('#dealerhand').html("");
+			$('#playerhand').html("");
+			
+			// if there are less than 10 cards in deck, get a new deck
+			if (howManyCardsInDeck() < 10) {
+				getNewDeck();
+			}
+
+		
+			for (var i=0; i<2; i++) {
+				var newcard = draw();
+				var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
+				$('#playerhand').append(newcard_image);
+				playercards.push(newcard);
+			}
+		 
 			var newcard = draw();
 			var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
-			$('#playerhand').append(newcard_image);
-			playercards.push(newcard);
+			$('#dealerhand').append(newcard_image);
+			dealercards.push(newcard);
+			
+			var newcard = draw();
+			var newcard_image = '<img class="card" src="images/CARDBACK.png">';
+			$('#dealerhand').append(newcard_image);
+			dealercards.push(newcard);	
+			
+			updateScores();
+			
+			if (hasBlackjack(playercards) == true) {
+				stand();
+			}
 		}
-	 
-		var newcard = draw();
-		var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
-		$('#dealerhand').append(newcard_image);
-		dealercards.push(newcard);
-		
-		var newcard = draw();
-		var newcard_image = '<img class="card" src="images/CARDBACK.png">';
-		$('#dealerhand').append(newcard_image);
-		dealercards.push(newcard);	
-		
-		updateScores();
-		
-		// if 
+		// player is betting more money than he has in balance.
+		else if (bet > balance) {
+			$('#statusText').html("you do not have $" + bet);
+			// set bet Amount to whatever he has left in balance
+			$("#spinner").spinner( "value", balance );
+		}	
 	}
 	 
 });	
@@ -334,6 +384,10 @@ $(document).ready(function($) {
 	cacheImage.src = $(this).attr('src'); 
 	cache.push(cacheImage); 
 	}); 
+	
+	// get new deck
+//	getNewDeck();
+	
 });
 
 }());
