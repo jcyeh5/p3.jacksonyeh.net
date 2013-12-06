@@ -25,76 +25,53 @@ body {
 	margin: 0 auto;
 }
 
+
+/*-------------------------------------------------------------------------------------------------
+the Table
+-------------------------------------------------------------------------------------------------*/
 #table {
 	width: 800px;
 	background-image: url(/images/table1.jpg);  
-
 	border: thick solid darkgreen;
 	float: left;
-	
 }
 
-#helpwindow {
-	width: 288px;
-	height: 516px;
-	background: purple;
-	border: thin solid yellow;
-	float: right;
+.card {
+	height: 160px;
+	width: 120px;
 }
 
-#wagerBox {
-	margin: 10px;
-	padding: 10px;
-	border: thin solid yellow;
-	font-size: large;
+#dealerhand {
+	width: 790px;
+	height: 160px;
 }
 
-#spinner {
-	width: 100px;
-	text-align: right;
-
+#midtable{
+	width: 790px;
+	height: 50px;
 }
 
-#balanceAmount {
-	width: 500px;
-	padding: 3px;
-	padding-left: 70px;
-	margin-left: 20px;
-	font-size: x-large;
-	background: gray;
-	border: thin solid gold;
+#playerhand {
+	width: 790px;
+	height: 160px;
 }
-
-#controls{
-	width: 808px;
-	height: 100px;
-	background-image: url(/images/cherrywood.jpg);  
-	border: thin solid black;
-	float: left;
-}
-
+/*-------------------------------------------------------------------------------------------------
+the Status Panel
+-------------------------------------------------------------------------------------------------*/
 #statusBox {
-	width: 809px;
+	width: 810px;
 	height: 50px;
 	background-color: darkgreen;
 	float: left;
 }
-#dealerScore {
-
-}
 
 #status {
-width: 359px;
-
+	width: 360px;
 }
+
 #statusText {
 	text-align: center;
-
 }
-#playerScore {
-	
-}
-
 
 .scoreBox {
 	margin: 5px;
@@ -111,35 +88,92 @@ width: 359px;
 	float: left;
 }
 
-
-
-#dealerhand {
-	width: 790px;
-	height: 160px;
+/*-------------------------------------------------------------------------------------------------
+the help panel
+-------------------------------------------------------------------------------------------------*/
+#helpwindow {
+	width: 290px;
+	height: 531px;
+	background: purple;
+	float: right;
 }
 
-#midtable{
-	width: 790px;
-	height: 50px;
-
+#cardCountBox {
+	margin: 10px;
+	padding-left: 10px;
 }
-#playerhand {
-	width: 790px;
-	height: 160px;
 
+#countText {
+	width: 100px;
+	padding-left: 30px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-right: 3px;
+	margin-left: 20px;
+	font-size: large;
+	background: gray;
+	border: thin solid yellow;
+}
+
+#balanceAmount {
+	width: 500px;
+	padding: 3px;
+	padding-left: 70px;
+	margin-left: 20px;
+	font-size: x-large;
+	background: gray;
+	border: thin solid gold;
+}
+
+#wagerBox {
+	margin: 10px;
+	padding: 10px;
+	border: thin solid yellow;
+	font-size: large;
+}
+
+#spinner {
+	width: 100px;
+	text-align: right;
+}
+
+#tabs {
+margin: 5px;
+}
+
+#tabs a, #tabs p {
+	margin: 2px;
+	padding: 2px;
+	font-size: small;
+}
+
+.tabContentHeader{
+	font-size: small;
+	font-weight: bold;
+}
+
+.tabContent {
+	font-size: small;
+	color: red;
+}
+
+
+/*-------------------------------------------------------------------------------------------------
+the Control Button panel
+-------------------------------------------------------------------------------------------------*/
+#controls{
+	width: 808px;
+	height: 100px;
+	background-image: url(/images/cherrywood.jpg);  
+	border: thin solid black;
+	float: left;
 }
 
 .controlbuttons {
-margin: 20px 5px auto 40px;
-height: 60px;
-width: 140px;
-cursor:pointer;
+	margin: 20px 5px auto 40px;
+	height: 60px;
+	width: 140px;
+	cursor:pointer;
 }
 
 
-
-.card {
-
-height: 160px;
-width: 120px;
-}

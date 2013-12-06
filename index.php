@@ -5,68 +5,72 @@
 	<title>blackjack</title>
 	<link href= "/css/style.css" type="text/css" rel="stylesheet"/>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-
-
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
-					
-	<!-- Controller Specific JS/CSS -->
-		
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />						
 </head>
-
 <body>	
 	<div id="header">
 		<a href='/' id="headerimage" title="Card Counter's Blackjack"><h1>Card Counter's Blackjack</h1></a>
 	</div>
 	
 	<div id="wrapper">
+		<!-- game status panel -->
 		<div id="statusBox">
 			<div id="dealerScore" class="scoreBox"> <span id="dealerScoreText" class="scoreText">Dealer's Hand:</span></div>
 			<div id="status" class="scoreBox"><span id="statusText" class="scoreText"></span></div>
 			<div id="playerScore" class="scoreBox"> <span id="playerScoreText" class="scoreText">Player's Hand:</span></div>
-
 		</div>
+		<!-- Help / Info Panel -->
 		<div id="helpwindow">
-			<div id="cardCount">COUNT: <span id="countText"></span></div>
+			<!-- Card Count Info -->	
+			<div id="cardCountBox">COUNT: <span id="countText">0</span></div>
+			<!-- Wager Info -->	
 			<div id="wagerBox">
 				<p>
 					<label class="wagerLabel">BALANCE:</label>
-		
 					<span id="balanceAmount"></span>
 				</p>
 				<p>
-				  <label for="spinner">Bet Amount:</label>
-				  <input id="spinner" name="wager">
+					<label for="spinner">Bet Amount:</label>
+					<input id="spinner" name="wager">
 				</p>
-				<br/> 
 				minimum bet: $20 <br/> 
 				maximum bet: $500<br/>
-
-			
+			</div>
+			<!-- info tab -->				
+			<div id="tabs">
+			  <ul>
+				<li><a href="#tabs-1">What is Card Counting?</a></li>
+				<li><a href="#tabs-2">Basics</a></li>
+			  </ul>
+			  <div id="tabs-1">
+				<p>The underlying principle behind card counting is that a deck rich in tens and aces is good for the player, a deck rich in small cards is good for the dealer. When the counter knows the odds are in his favor, he will bet more, and adjust his playing strategy to stand, and double in some plays where basic strategy says to stand.  -from wikipedia</p>
+			  </div>
+			  <div id="tabs-2">
+				<span class="tabContentHeader">+1 to the count for each:</span><br/>
+				<span class="tabContent">2, 3, 4, 5, 6</span><br/>
+				<span class="tabContentHeader">-1 to the count for each:</span><br/>
+				<span class="tabContent">10, J, Q, K, A</span><br/>
+				<br/>
+				<p> when the count is higher, there are more tens and aces in the deck.  Conversely, when the count is lower, there are more small cards in deck.</p>
+			  </div>
 			</div>
 		</div>	
+		
 		<!-- the table -->	
 		<div id="table">
 		<!-- the dealer's hand -->	
-			<div id="dealerhand">
-
-			</div>
+			<div id="dealerhand"></div>
 			<!-- the place to put chips (future enhancement) -->	
-			<div id="midtable">
-
-			</div>
+			<div id="midtable"></div>
 			<!-- the Player's hand -->	
-			<div id="playerhand">
-				
-			</div>
+			<div id="playerhand"></div>
 		</div>
 
 		<div id="controls">
-
-			<img id="hit_button" class="controlbuttons" src="images/hit.png" rel="images/hit_hover.png" alt="hit button">
-			<img id="stand_button" class="controlbuttons" src="images/stand.png" rel="images/stand_hover.png" alt="stand button" >
-			<img id="double_button" class="controlbuttons" src="images/double.png" rel="images/double_hover.png" alt="double button" >
-			<img id="deal_button" class="controlbuttons" src="images/deal.png" rel="images/deal_hover.png" alt="deal button"  >			
+			<img id="hit_button" class="controlbuttons" src="images/hit.png" alt="hit button">
+			<img id="stand_button" class="controlbuttons" src="images/stand.png" alt="stand button" >
+			<img id="double_button" class="controlbuttons" src="images/double.png" alt="double button" >
+			<img id="deal_button" class="controlbuttons" src="images/deal.png" alt="deal button"  >			
 		</div>
 	</div>
 
