@@ -12,8 +12,9 @@ var cards = [	"SA","S2","S3","S4","S5","S6","S7","S8","S9","S10","SJ","SQ","SK",
 var top = 0;			// index of the top card in deck
 var dealercards = []; 	// cards in dealer's hand
 var playercards = [];	// cards in player's hand
-
 var ingame = false;
+var balance = 5000;		// player's initial balance is $5000
+
 
 function isEmpty(){
 	if (top == 52) {
@@ -83,13 +84,22 @@ function deactivateButtons() {
 	$('#hit_button').attr('src', 'images/hit_disabled.png');
 	$('#stand_button').attr('src', 'images/stand_disabled.png');
 	$('#double_button').attr('src', 'images/double_disabled.png');	
+	$('#deal_button').attr('src', 'images/deal.png');
+	// enable buttons on spinner
+	// from: http://stackoverflow.com/users/2184393/cafe-coder
+	$('.ui-spinner a.ui-spinner-button').css('display','block');
 }
 
 function activateButtons() {
 	// changes color to blue
 	$('#hit_button').attr('src', 'images/hit.png');
 	$('#stand_button').attr('src', 'images/stand.png');
-	$('#double_button').attr('src', 'images/double.png');	
+	$('#double_button').attr('src', 'images/double.png');
+	$('#deal_button').attr('src', 'images/deal_disabled.png');	
+	// disable buttons on spinner
+	// from: http://stackoverflow.com/users/2184393/cafe-coder
+	$('.ui-spinner a.ui-spinner-button').css('display','none');
+
 }
 
 function updateScores() {
@@ -230,7 +240,7 @@ $('.controlbuttons').click(function() {
 	 }
 	 
 	 
-	 if (this.id == "deal_button") {	 
+	 if (this.id == "deal_button" && ingame == false) {	 
 		activateButtons();
 		clearStatusText();
 		ingame = true;
@@ -268,23 +278,26 @@ $('.controlbuttons').click(function() {
 
 $('.controlbuttons').on( "mouseenter", function() {
 
-console.log("mouseenter");
-	if (ingame == true || this.id == "deal_button") {
-		if (this.id == "deal_button") $(this).attr('src', "images/deal_hover.png");
+	if (ingame == true) {
+		if (this.id == "double_button") $(this).attr('src', "images/double_hover.png");
 		else if (this.id == "hit_button") $(this).attr('src', "images/hit_hover.png");
-		else if (this.id == "stand_button") $(this).attr('src', "images/stand_hover.png");	
-		else if (this.id == "double_button") $(this).attr('src', "images/double_hover.png");		 
+		else if (this.id == "stand_button") $(this).attr('src', "images/stand_hover.png");			 
+	} 
+	else if (ingame == false) {
+		if (this.id == "deal_button") $(this).attr('src', "images/deal_hover.png");
 	}
 });
 
 $('.controlbuttons').on( "mouseleave", function() {
 
-	if (ingame == true || this.id == "deal_button") {
-		if (this.id == "deal_button") $(this).attr('src', "images/deal.png");
+	if (ingame == true) {
+		if (this.id == "double_button") $(this).attr('src', "images/double.png");
 		else if (this.id == "hit_button") $(this).attr('src', "images/hit.png");
-		else if (this.id == "stand_button") $(this).attr('src', "images/stand.png");	
-		else if (this.id == "double_button") $(this).attr('src', "images/double.png");		 
+		else if (this.id == "stand_button") $(this).attr('src', "images/stand.png");		 
 	}
+	else if(ingame == false) {
+		if (this.id == "deal_button") $(this).attr('src', "images/deal.png");
+	}	
 });
 
 
@@ -298,6 +311,22 @@ $(document).ready(function($) {
 		deactivateButtons();	
 	}
  
+	// JQuery UI spinner for wager input
+	var spinner = $("#spinner").spinner({max:500, min:20, step:20, incremental:true, numberFormat: "c"});
+	
+	$("#spinner").spinner( "value", 20 );
+   
+                  
+	// Prevent user from manually typing values into spinner
+	// from: http://stackoverflow.com/users/1054573/leonard-pauli
+	$("#spinner").focus(function () {
+		$(this).blur();
+	});
+ 
+	// display initial balance amount
+	$('#balanceAmount').html("$ "+balance);
+	
+	
 	//preload images 
 	var cache = new Array(); //add all images to cache array 
 	$('img').each(function(){ 

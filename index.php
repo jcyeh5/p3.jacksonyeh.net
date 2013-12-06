@@ -4,6 +4,10 @@
 	<script src="/A2EB891D63C8/avg_ls_dom.js" type="text/javascript"></script>
 	<title>blackjack</title>
 	<link href= "/css/style.css" type="text/css" rel="stylesheet"/>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
+
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 					
 	<!-- Controller Specific JS/CSS -->
@@ -23,7 +27,23 @@
 
 		</div>
 		<div id="helpwindow">
-		help window
+			<div id="cardCount">COUNT: <span id="countText"></span></div>
+			<div id="wagerBox">
+				<p>
+					<label class="wagerLabel">BALANCE:</label>
+		
+					<span id="balanceAmount"></span>
+				</p>
+				<p>
+				  <label for="spinner">Bet Amount:</label>
+				  <input id="spinner" name="wager">
+				</p>
+				</br> 
+				minimum bet: $20 </br> 
+				maximum bet: $500</br>
+
+			
+			</div>
 		</div>	
 		<!-- the table -->	
 		<div id="table">
@@ -50,7 +70,10 @@
 		</div>
 	</div>
 
-	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="/js/jquery.mousewheel.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	<script type="text/javascript" src="/js/blackjack.js"></script>
 	
 </body>
