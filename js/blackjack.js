@@ -26,6 +26,18 @@ function preload(arrayOfImages) {
     });
 }
 
+
+function preload(arrayOfImages) {
+    $(arrayOfImages).each(function(){
+        $('<img/>')[0].src = this;
+        // Alternatively you could use:
+        // (new Image()).src = this;
+    });
+}
+
+
+
+
 /*-------------------------------------------------------------------------------------------------
 Deck functions
 -------------------------------------------------------------------------------------------------*/
@@ -489,9 +501,12 @@ $(document).ready(function($) {
 	var arrayOfImages = new Array();
 	// populate array with image src
 	for (var i = 0; i < 52; i++) {
-		$('<img/>')[0].src =  = 'images/' + cards[i] + '.png';
+		var image = "images/" + cards[i] + ".png";
+		arrayOfImages.push(image);
 	}
 
+	
+	preload(arrayOfImages);
 	
 	// get new deck
 	getNewDeck();
