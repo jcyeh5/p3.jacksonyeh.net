@@ -21,6 +21,7 @@ var cardCount = 0;		// the card count
 
 
 
+
 /*-------------------------------------------------------------------------------------------------
 Deck functions
 -------------------------------------------------------------------------------------------------*/
@@ -470,6 +471,7 @@ $(document).ready(function($) {
 	$('#balanceAmount').html("$ "+balance);
 	
 	//preload images 
+/*
 	//- See more at: http://www.grasmash.com/article/simple-jquery-script-swapping-images-hoverrollover#sthash.8op7JXg9.dpuf
 	var cache = new Array(); //add all images to cache array 
 	$('img').each(function(){ 
@@ -477,6 +479,21 @@ $(document).ready(function($) {
 	cacheImage.src = $(this).attr('src'); 
 	cache.push(cacheImage); 
 	}); 
+*/
+
+
+	if (!preloadImages.list) {
+		preloadImages.list = [];
+	}
+	for (var i = 0; i < 52; i++) {
+		var img = new Image();
+		img.src = 'images/' + cards[i] + '.png';
+		preloadImages.list.push(img);
+	}
+
+
+
+
 	
 	// get new deck
 	getNewDeck();
