@@ -405,10 +405,12 @@ $('.controlbuttons').click(function() {
 		}	
 		preload(arrayOfImages);
 	
+		// get new deck
+		getNewDeck();	
+	
 	}
 		
-	// get new deck
-	getNewDeck();	 
+ 
 	 
 		// retrieve bet amount from spinner.
 		bet = $('#spinner').spinner("value");
