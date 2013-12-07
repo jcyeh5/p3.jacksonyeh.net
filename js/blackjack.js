@@ -14,6 +14,7 @@ var cards = [	"SA","S2","S3","S4","S5","S6","S7","S8","S9","S10","SJ","SQ","SK",
 var top = 0;			// index of the top card in deck
 var dealercards = []; 	// cards in dealer's hand
 var playercards = [];	// cards in player's hand
+var startGame = true;	// starting the game
 var ingame = false;		// in the middle of a hand?
 var balance = 200;		// player's initial balance is $5000
 var bet = 0;			// player's bet
@@ -370,6 +371,23 @@ $('.controlbuttons').click(function() {
 	// only allow DEAL if in between hands	 
 	 if (this.id == "deal_button" && ingame == false) {	 
 
+	//preload all the card images once at beginning of game
+	if (startGame == true) {
+	
+		startGame = false;
+		//- See more at: http://www.grasmash.com/article/simple-jquery-script-swapping-images-hoverrollover#sthash.8op7JXg9.dpuf
+		var arrayOfImages = new Array();
+		// populate array with image src
+		for (var i = 0; i < 52; i++) {
+			var image = "images/" + cards[i] + ".png";
+			arrayOfImages.push(image);
+		}	
+		preload(arrayOfImages);
+	}
+		
+	// get new deck
+	getNewDeck();	 
+	 
 		// retrieve bet amount from spinner.
 		bet = $('#spinner').spinner("value");
 		// if player balance is 0, print sorry message
@@ -486,19 +504,7 @@ $(document).ready(function($) {
 	// display initial balance amount
 	$('#balanceAmount').html("$ "+balance);
 	
-	//preload images 
-	//- See more at: http://www.grasmash.com/article/simple-jquery-script-swapping-images-hoverrollover#sthash.8op7JXg9.dpuf
 
-	var arrayOfImages = new Array();
-	// populate array with image src
-	for (var i = 0; i < 52; i++) {
-		var image = "images/" + cards[i] + ".png";
-		arrayOfImages.push(image);
-	}	
-//	preload(arrayOfImages);
-	
-	// get new deck
-	getNewDeck();
 	
 });
 
