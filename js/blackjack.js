@@ -26,6 +26,8 @@ function preload(arrayOfImages) {
     });
 }
 */
+
+// from: http://stackoverflow.com/questions/19501032/relative-path-in-preloading-images
 function preload(arrayOfImages) {
     $(arrayOfImages).each(function(){
         $('<img/>')[0].src = this;
@@ -493,7 +495,7 @@ $(document).ready(function($) {
 		var image = "images/" + cards[i] + ".png";
 		arrayOfImages.push(image);
 	}	
-	preload(arrayOfImages);
+//	preload(arrayOfImages);
 	
 	// get new deck
 	getNewDeck();
