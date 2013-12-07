@@ -63,9 +63,7 @@ function getNewDeck() {
 	cardCount = 0;	
 	updateCount();
 	// update status, alerting user that a new deck is used
-	$('#status').css("background-color","white");
-	$('#statusText').css("color","red");
-	$('#statusText').html("Dealing new Deck, reset COUNT");	
+	writeStatus("Dealing new Deck, reset CARD COUNT to zero");
 }
 
 // draw a card
@@ -195,32 +193,31 @@ function updateBalance() {
 function clearStatusText() {
 	$('#midtable').html("");
 	$('#midtable').css("background-color","");	
-	$('#statusText').html("");
-	$('#status').css("background-color","darkgreen");	
-	$('#statusText').css("color","gold");		
 	$('#dealerScoreText').html("Dealer's Hand:  " );
 	$('#playerScoreText').html("Player's Hand:  " );	
 }
 
+// write a status message to screen
+function writeStatus(msg){
+	$('#midtable').css("background-color","white");
+	$('#midtable').css("color","red");	
+	$('#midtable').attr("align","center");
+	$('#midtable').html(msg);
+}
+
 // update the scoreboard when dealer wins
 function dealerWins() {
-	$('#status').css("background-color","white");
-	$('#statusText').css("color","red");	
-	$('#statusText').html("Dealer Wins");
+	writeStatus("Dealer Wins");
 }
 
 // update the scoreboard when player wins
 function playerWins(message) {
-	$('#status').css("background-color","white");
-	$('#statusText').css("color","red");
-	$('#statusText').html(message);
+	writeStatus(message);
 }
 
 // update the scoreboard when tie
 function tie() {
-	$('#status').css("background-color","white");
-	$('#statusText').css("color","red");
-	$('#statusText').html("TIE");
+	writeStatus("Tie");
 }
 
 /*-------------------------------------------------------------------------------------------------
@@ -290,9 +287,9 @@ function busted() {
 	updateScores();	
 	balance = balance - bet;
 	updateBalance()
-	$('#status').css("background-color","white");
-	$('#statusText').css("color","red");
-	$('#statusText').html("You busted");
+
+	writeStatus("You busted");
+
 }
 
 // what happens when STAND button is clicked
@@ -327,6 +324,9 @@ function stand() {
 
 // what happens when HIT button is clicked
 function hit() {
+	//clear any messages
+	$('#midtable').html("");
+	$('#midtable').css("background-color","");	
 	var handvalue = handValue(playercards);
 
 	// if current hand is under 21
@@ -348,9 +348,7 @@ function hit() {
 		}						
 	}
 	else if (handvalue > 21) {
-		$('#status').css("background-color","white");
-		$('#statusText').css("color","red");
-		$('#statusText').html("you busted already!!!");
+		writeStatus("you busted already!!!");		
 	}
 }		
 
@@ -392,33 +390,28 @@ $('.controlbuttons').click(function() {
 	// only allow DEAL if in between hands	 
 	 if (this.id == "deal_button" && ingame == false) {	 
 
-	//preload all the card images once at beginning of game
-	if (startGame == true) {
-	
-		startGame = false;
-		//- See more at: http://www.grasmash.com/article/simple-jquery-script-swapping-images-hoverrollover#sthash.8op7JXg9.dpuf
-		var arrayOfImages = new Array();
-		// populate array with image src
-		for (var i = 0; i < 52; i++) {
-			var image = "images/" + cards[i] + ".png";
-			arrayOfImages.push(image);
-		}	
-		preload(arrayOfImages);
-	
-		// get new deck
-		getNewDeck();	
-	
-	}
+		//preload all the card images once at beginning of game
+		if (startGame == true) {
 		
- 
-	 
+			startGame = false;
+			//- See more at: http://www.grasmash.com/article/simple-jquery-script-swapping-images-hoverrollover#sthash.8op7JXg9.dpuf
+			var arrayOfImages = new Array();
+			// populate array with image src
+			for (var i = 0; i < 52; i++) {
+				var image = "images/" + cards[i] + ".png";
+				arrayOfImages.push(image);
+			}	
+			preload(arrayOfImages);
+		
+			// get new deck
+			getNewDeck();	
+		}
+	
 		// retrieve bet amount from spinner.
 		bet = $('#spinner').spinner("value");
 		// if player balance is 0, print sorry message
 		if (balance == 0) {
-			$('#status').css("background-color","white");
-			$('#statusText').css("color","red");
-			$('#statusText').html("Sorry, you are broke");
+			writeStatus("Sorry, you are broke");
 		}
 		// if bet is acceptable
 		else if (bet <= balance) {
@@ -465,9 +458,7 @@ $('.controlbuttons').click(function() {
 		}
 		// player is betting more money than he has in balance.
 		else if (bet > balance) {
-			$('#status').css("background-color","white");
-			$('#statusText').css("color","red");
-			$('#statusText').html("you do not have $" + bet);
+			writeStatus("you do not have $" + bet);
 			// set bet Amount to whatever he has left in balance
 			$("#spinner").spinner( "value", balance );
 		}	
