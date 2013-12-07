@@ -383,6 +383,7 @@ $('.controlbuttons').click(function() {
 			arrayOfImages.push(image);
 		}	
 		preload(arrayOfImages);
+	
 	}
 		
 	// get new deck
