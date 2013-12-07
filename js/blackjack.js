@@ -42,6 +42,7 @@ function preload(arrayOfImages) {
 /*-------------------------------------------------------------------------------------------------
 Deck functions
 -------------------------------------------------------------------------------------------------*/
+// is the deck empty?
 function isEmpty(){
 	if (top == 52) {
 		return true;
@@ -49,27 +50,32 @@ function isEmpty(){
 	else return false;
 };
 
+// how many cards left in deck?
 function howManyCardsInDeck() {
 	var num = 52 - top;
 	return num;
 }
 
+// get a new deck
 function getNewDeck() {
 	top = 0;
 	shuffle();
 	cardCount = 0;	
 	updateCount();
+	// update status, alerting user that a new deck is used
 	$('#status').css("background-color","white");
 	$('#statusText').css("color","red");
 	$('#statusText').html("Dealing new Deck, reset COUNT");	
 }
 
+// draw a card
 function draw(){
 	var card = cards[top];
 	top++;
 	return card;
 };
 
+// shuffle the deck
 function shuffle(){
 	for (var i=0; i<52; i++) {
 		var temp = cards[i];
@@ -162,9 +168,9 @@ function activateButtons() {
 }
 
 /*-------------------------------------------------------------------------------------------------
-update Status functions
+update Status Scoreboard functions
 -------------------------------------------------------------------------------------------------*/
-
+// update the scoreboard with both the player's hand value and the dealer's hand value
 function updateScores() {
 	if (ingame == true){
 		$('#dealerScoreText').html("Dealer's Hand:   ??");
@@ -172,6 +178,7 @@ function updateScores() {
 	$('#playerScoreText').html("Player's Hand:  " + handValue(playercards));
 }
 
+// update the Card Count and refresh the scoreboard
 function updateCount(card) {
 	var rank = getCardValue(card);
 	if (rank == 10 || rank == 11) cardCount--;
@@ -179,10 +186,12 @@ function updateCount(card) {
 	$('#countText').html(cardCount);
 }
 
+// update the player's balance on the scoreboard
 function updateBalance() {
 	$('#balanceAmount').html("$ "+balance);	
 }
 
+// clear the values on the scoreboard at the beginning of each hand
 function clearStatusText() {
 	$('#midtable').html("");
 	$('#midtable').css("background-color","");	
@@ -193,18 +202,21 @@ function clearStatusText() {
 	$('#playerScoreText').html("Player's Hand:  " );	
 }
 
+// update the scoreboard when dealer wins
 function dealerWins() {
 	$('#status').css("background-color","white");
 	$('#statusText').css("color","red");	
 	$('#statusText').html("Dealer Wins");
 }
 
+// update the scoreboard when player wins
 function playerWins(message) {
 	$('#status').css("background-color","white");
 	$('#statusText').css("color","red");
 	$('#statusText').html(message);
 }
 
+// update the scoreboard when tie
 function tie() {
 	$('#status').css("background-color","white");
 	$('#statusText').css("color","red");
@@ -215,6 +227,7 @@ function tie() {
 game functions
 -------------------------------------------------------------------------------------------------*/
 
+// dealer play logic
 function dealerPlays() {
 	// show both dealer cards
 	$('#dealerhand').html("");
@@ -227,10 +240,13 @@ function dealerPlays() {
 	
 	// dealer must hit until 17
 	while (handValue(dealercards) < 17) {
+		// draw a card
 		var newcard = draw();
 		var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
 		$('#dealerhand').append(newcard_image);
+		// add card to dealer's hand
 		dealercards.push(newcard);
+		// update values
 		updateScores();
 		updateCount(newcard);
 	}
@@ -285,6 +301,7 @@ function stand() {
 	ingame = false;
 	updateScores();
 	dealerPlays();
+	// after dealer plays...determine who won and what to do
 	var x= whoWon();
 	if (x=="tie") {
 		tie();
@@ -311,7 +328,8 @@ function stand() {
 // what happens when HIT button is clicked
 function hit() {
 	var handvalue = handValue(playercards);
-	 
+
+	// if current hand is under 21
 	if (handvalue > 0 && handvalue <= 21 ) {	
 		var newcard = draw();
 		var newcard_image = '<img class="card" src="images/' + newcard + '.png">';
@@ -320,10 +338,11 @@ function hit() {
 		var value = handValue(playercards);
 		updateCount(newcard);
 		updateScores();		
-		//console.log(value);
+		// if current hand is 21, do not allow another hit
 		if (value == 21) {
 			stand();
 		}
+		// if current hand is over 21, then bust
 		else if (value > 21) {
 			busted();
 		}						
@@ -399,8 +418,10 @@ $('.controlbuttons').click(function() {
 			$('#statusText').css("color","red");
 			$('#statusText').html("Sorry, you are broke");
 		}
+		// if bet is acceptable
 		else if (bet <= balance) {
 			activateButtons();
+			// start new hand of blackjack, clear everything
 			clearStatusText();
 			ingame = true;
 			dealercards = [];
@@ -409,7 +430,6 @@ $('.controlbuttons').click(function() {
 			$('#playerhand').html("");
 			
 			// if there are less than 10 cards in deck, get a new deck
-			//console.log("cards left in deck= " + howManyCardsInDeck());
 			if (howManyCardsInDeck() < 10) {
 				getNewDeck();
 			}
@@ -506,7 +526,7 @@ $(document).ready(function($) {
  
 	// display initial balance amount
 	$('#balanceAmount').html("$ "+balance);
-	
+	// display initial message instructing player to click DEAL button
 	$('#midtable').css("background-color","white");
 	$('#midtable').css("color","red");	
 	$('#midtable').attr("align","center");

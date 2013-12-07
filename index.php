@@ -65,7 +65,7 @@
 			<!-- the Player's hand -->	
 			<div id="playerhand"></div>
 		</div>
-
+		<!-- the control buttons -->	
 		<div id="controls">
 			<img id="hit_button" class="controlbuttons" src="images/hit.png" alt="hit button">
 			<img id="stand_button" class="controlbuttons" src="images/stand.png" alt="stand button" >
