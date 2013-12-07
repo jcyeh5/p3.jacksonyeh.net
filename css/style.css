@@ -47,8 +47,10 @@ the Table
 }
 
 #midtable{
-	width: 790px;
-	height: 50px;
+	margin: 20px;
+	padding: 10px;
+	width: 720px;
+	height: 20px;
 }
 
 #playerhand {
@@ -93,7 +95,7 @@ the help panel
 -------------------------------------------------------------------------------------------------*/
 #helpwindow {
 	width: 290px;
-	height: 531px;
+	height: 561px;
 	background: purple;
 	float: right;
 }

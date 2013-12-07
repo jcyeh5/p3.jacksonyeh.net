@@ -184,6 +184,8 @@ function updateBalance() {
 }
 
 function clearStatusText() {
+	$('#midtable').html("");
+	$('#midtable').css("background-color","");	
 	$('#statusText').html("");
 	$('#status').css("background-color","darkgreen");	
 	$('#statusText').css("color","gold");		
@@ -505,7 +507,10 @@ $(document).ready(function($) {
 	// display initial balance amount
 	$('#balanceAmount').html("$ "+balance);
 	
-
+	$('#midtable').css("background-color","white");
+	$('#midtable').css("color","red");	
+	$('#midtable').attr("align","center");
+	$('#midtable').html("**Click on DEAL Button to Start Game**");
 	
 });
 
