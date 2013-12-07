@@ -317,7 +317,7 @@ function hit() {
 		var value = handValue(playercards);
 		updateCount(newcard);
 		updateScores();		
-		console.log(value);
+		//console.log(value);
 		if (value == 21) {
 			stand();
 		}
@@ -388,7 +388,7 @@ $('.controlbuttons').click(function() {
 			$('#playerhand').html("");
 			
 			// if there are less than 10 cards in deck, get a new deck
-			console.log("cards left in deck= " + howManyCardsInDeck());
+			//console.log("cards left in deck= " + howManyCardsInDeck());
 			if (howManyCardsInDeck() < 10) {
 				getNewDeck();
 			}
@@ -487,29 +487,18 @@ $(document).ready(function($) {
 	$('#balanceAmount').html("$ "+balance);
 	
 	//preload images 
-/*
 	//- See more at: http://www.grasmash.com/article/simple-jquery-script-swapping-images-hoverrollover#sthash.8op7JXg9.dpuf
-	var cache = new Array(); //add all images to cache array 
-	$('img').each(function(){ 
-	var cacheImage = new  Image(); 
-	cacheImage.src = $(this).attr('src'); 
-	cache.push(cacheImage); 
-	}); 
-*/
-
 
 	var arrayOfImages = new Array();
 	// populate array with image src
 	for (var i = 0; i < 52; i++) {
 		var image = "images/" + cards[i] + ".png";
 		arrayOfImages.push(image);
-	}
-
-	
+	}	
 	preload(arrayOfImages);
 	
 	// get new deck
-	//getNewDeck();
+	getNewDeck();
 	
 });
 

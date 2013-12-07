@@ -39,13 +39,10 @@
 			<!-- info tab -->				
 			<div id="tabs">
 			  <ul>
-				<li><a href="#tabs-1">What is Card Counting?</a></li>
-				<li><a href="#tabs-2">Basics</a></li>
+				<li><a href="#tabs-1">Basics</a></li>			  
+				<li><a href="#tabs-2">What is Card Counting?</a></li>
 			  </ul>
 			  <div id="tabs-1">
-				<p>The underlying principle behind card counting is that a deck rich in tens and aces is good for the player, a deck rich in small cards is good for the dealer. When the counter knows the odds are in his favor, he will bet more, and adjust his playing strategy to stand, and double in some plays where basic strategy says to stand.  -from wikipedia</p>
-			  </div>
-			  <div id="tabs-2">
 				<span class="tabContentHeader">+1 to the count for each:</span><br/>
 				<span class="tabContent">2, 3, 4, 5, 6</span><br/>
 				<span class="tabContentHeader">-1 to the count for each:</span><br/>
@@ -53,6 +50,9 @@
 				<br/>
 				<p> when the count is higher, there are more tens and aces in the deck.  Conversely, when the count is lower, there are more small cards in deck.</p>
 			  </div>
+			  <div id="tabs-2">
+				<p>The underlying principle behind card counting is that a deck rich in tens and aces is good for the player, a deck rich in small cards is good for the dealer. When the counter knows the odds are in his favor, he will bet more, and adjust his playing strategy to stand, and double in some plays where basic strategy says to stand.  -from wikipedia</p>
+			  </div>			  
 			</div>
 		</div>	
 		
