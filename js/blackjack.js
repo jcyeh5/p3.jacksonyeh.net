@@ -18,22 +18,21 @@ var ingame = false;		// in the middle of a hand?
 var balance = 200;		// player's initial balance is $5000
 var bet = 0;			// player's bet
 var cardCount = 0;		// the card count
-
+/*
 // preload concept from: http://www.web-wise-wizard.com/web-graphics-design/javascript-preload-preloading-images.html
 function preload(arrayOfImages) {
     $(arrayOfImages).each(function () {
         $('<img />').attr('src',this).appendTo('body').css('display','none');
     });
 }
-/*
+*/
 function preload(arrayOfImages) {
     $(arrayOfImages).each(function(){
         $('<img/>')[0].src = this;
-        // Alternatively you could use:
-        // (new Image()).src = this;
+
     });
 }
-*/
+
 
 
 
